@@ -186,6 +186,8 @@
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
     <None Include="Resources\settings.png" />
+    <None Include="Resources\cloud-computing.png" />
+    <None Include="Resources\cloud-computing-off.png" />
     <Content Include="shelf.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -54,11 +54,13 @@
             this.newTypeBtn = new MetroFramework.Controls.MetroButton();
             this.itemTypeComboBox = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.AutoBackuppictureBox = new System.Windows.Forms.PictureBox();
             this.settingsPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Inventory)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AutoBackuppictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -325,6 +327,16 @@
             this.metroLabel4.TabIndex = 2;
             this.metroLabel4.Text = "Vare type indstillinger";
             // 
+            // AutoBackuppictureBox
+            // 
+            this.AutoBackuppictureBox.BackgroundImage = global::InventoryManagement.Properties.Resources.cloud_computing_off;
+            this.AutoBackuppictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.AutoBackuppictureBox.Location = new System.Drawing.Point(1015, 34);
+            this.AutoBackuppictureBox.Name = "AutoBackuppictureBox";
+            this.AutoBackuppictureBox.Size = new System.Drawing.Size(23, 23);
+            this.AutoBackuppictureBox.TabIndex = 9;
+            this.AutoBackuppictureBox.TabStop = false;
+            // 
             // settingsPictureBox
             // 
             this.settingsPictureBox.BackgroundImage = global::InventoryManagement.Properties.Resources.settings;
@@ -342,6 +354,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(1077, 552);
+            this.Controls.Add(this.AutoBackuppictureBox);
             this.Controls.Add(this.settingsPictureBox);
             this.Controls.Add(this.metroPanel3);
             this.Controls.Add(this.metroPanel2);
@@ -359,6 +372,7 @@
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel3.ResumeLayout(false);
             this.metroPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AutoBackuppictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsPictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -392,6 +406,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EquipmentAge;
         private System.Windows.Forms.DataGridViewTextBoxColumn Note;
         private System.Windows.Forms.PictureBox settingsPictureBox;
+        private System.Windows.Forms.PictureBox AutoBackuppictureBox;
     }
 }
 

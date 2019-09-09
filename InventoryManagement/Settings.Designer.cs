@@ -34,6 +34,9 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.cancelSettingsButton = new MetroFramework.Controls.MetroButton();
             this.backupPanel = new MetroFramework.Controls.MetroPanel();
+            this.hoursSelector = new System.Windows.Forms.NumericUpDown();
+            this.minutesSelector = new System.Windows.Forms.NumericUpDown();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.overrideOldBackupCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.browseBackupLocButton = new MetroFramework.Controls.MetroButton();
@@ -42,9 +45,11 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.databaseNameTextBox = new MetroFramework.Controls.MetroTextBox();
             this.startWithwindowsCheckBox = new MetroFramework.Controls.MetroCheckBox();
-            this.backupFrequenceCtrl = new MetroFramework.Controls.MetroDateTime();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.backupPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hoursSelector)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutesSelector)).BeginInit();
             this.SuspendLayout();
             // 
             // saveSettingsBtn
@@ -116,12 +121,16 @@
             this.cancelSettingsButton.TabIndex = 4;
             this.cancelSettingsButton.Text = "Afslut uden at gemme";
             this.cancelSettingsButton.UseSelectable = true;
+            this.cancelSettingsButton.Click += new System.EventHandler(this.cancelSettingsButton_Click);
             // 
             // backupPanel
             // 
             this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.backupPanel.Controls.Add(this.metroLabel6);
+            this.backupPanel.Controls.Add(this.metroLabel5);
+            this.backupPanel.Controls.Add(this.hoursSelector);
+            this.backupPanel.Controls.Add(this.minutesSelector);
             this.backupPanel.Controls.Add(this.metroLabel4);
-            this.backupPanel.Controls.Add(this.backupFrequenceCtrl);
             this.backupPanel.Controls.Add(this.overrideOldBackupCheckBox);
             this.backupPanel.Controls.Add(this.metroLabel2);
             this.backupPanel.Controls.Add(this.browseBackupLocButton);
@@ -137,6 +146,29 @@
             this.backupPanel.VerticalScrollbarBarColor = true;
             this.backupPanel.VerticalScrollbarHighlightOnWheel = false;
             this.backupPanel.VerticalScrollbarSize = 10;
+            // 
+            // hoursSelector
+            // 
+            this.hoursSelector.Location = new System.Drawing.Point(255, 73);
+            this.hoursSelector.Name = "hoursSelector";
+            this.hoursSelector.Size = new System.Drawing.Size(92, 20);
+            this.hoursSelector.TabIndex = 11;
+            // 
+            // minutesSelector
+            // 
+            this.minutesSelector.Location = new System.Drawing.Point(421, 75);
+            this.minutesSelector.Name = "minutesSelector";
+            this.minutesSelector.Size = new System.Drawing.Size(92, 20);
+            this.minutesSelector.TabIndex = 10;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(7, 75);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(105, 19);
+            this.metroLabel4.TabIndex = 9;
+            this.metroLabel4.Text = "Backup frekvens:";
             // 
             // overrideOldBackupCheckBox
             // 
@@ -165,6 +197,7 @@
             this.browseBackupLocButton.TabIndex = 5;
             this.browseBackupLocButton.Text = "Vælg";
             this.browseBackupLocButton.UseSelectable = true;
+            this.browseBackupLocButton.Click += new System.EventHandler(this.browseBackupLocButton_Click);
             // 
             // backupLocationTextBox
             // 
@@ -260,25 +293,23 @@
             this.startWithwindowsCheckBox.Text = "Automatisk start med Windows (Kræver opstart som Administrator)";
             this.startWithwindowsCheckBox.UseSelectable = true;
             // 
-            // backupFrequenceCtrl
+            // metroLabel5
             // 
-            this.backupFrequenceCtrl.CustomFormat = "HH:mm";
-            this.backupFrequenceCtrl.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.backupFrequenceCtrl.Location = new System.Drawing.Point(313, 75);
-            this.backupFrequenceCtrl.MinimumSize = new System.Drawing.Size(0, 29);
-            this.backupFrequenceCtrl.Name = "backupFrequenceCtrl";
-            this.backupFrequenceCtrl.Size = new System.Drawing.Size(200, 29);
-            this.backupFrequenceCtrl.TabIndex = 8;
-            this.backupFrequenceCtrl.Value = new System.DateTime(2019, 9, 9, 19, 16, 0, 0);
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(202, 74);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel5.TabIndex = 12;
+            this.metroLabel5.Text = "Timer:";
             // 
-            // metroLabel4
+            // metroLabel6
             // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(7, 75);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(208, 19);
-            this.metroLabel4.TabIndex = 9;
-            this.metroLabel4.Text = "Backup frekvens (Timer : Minutter)";
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(353, 74);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(62, 19);
+            this.metroLabel6.TabIndex = 13;
+            this.metroLabel6.Text = "Minutter:";
             // 
             // Settings
             // 
@@ -299,6 +330,8 @@
             this.Text = "Indstillinger";
             this.backupPanel.ResumeLayout(false);
             this.backupPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hoursSelector)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutesSelector)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,6 +354,9 @@
         private MetroFramework.Controls.MetroTextBox databaseNameTextBox;
         private MetroFramework.Controls.MetroCheckBox startWithwindowsCheckBox;
         private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroDateTime backupFrequenceCtrl;
+        private System.Windows.Forms.NumericUpDown hoursSelector;
+        private System.Windows.Forms.NumericUpDown minutesSelector;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
     }
 }

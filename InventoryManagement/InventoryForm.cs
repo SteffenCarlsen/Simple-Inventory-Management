@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Timers;
 using System.Windows.Forms;
 using InventoryManagement.CreateTypesUI;
 using InventoryManagement.Model;
+using InventoryManagement.Properties;
 using LiteDB;
 using MetroFramework.Forms;
-
+using Timer = System.Windows.Forms.Timer;
 namespace InventoryManagement
 {
     /// <summary>
@@ -21,7 +23,12 @@ namespace InventoryManagement
         /// <summary>
         /// A global application settings instance
         /// </summary>
-        public readonly ApplicationSettings AppSettings = new ApplicationSettings();
+        public ApplicationSettings AppSettings = new ApplicationSettings();
+
+        /// <summary>
+        /// A timer for the autobackup system
+        /// </summary>
+        private readonly Timer _autoBackupTimer = new Timer();
 
         /// <summary>
         /// Default constructor starting the application and initializing the database
@@ -30,7 +37,71 @@ namespace InventoryManagement
         {
             InitializeComponent();
             AppSettings.Load();
-            _db = new LiteDatabase(Path.Combine(Environment.CurrentDirectory, @"Database.db"));
+            _db = new LiteDatabase(Path.Combine(AppSettings.DatabaseDirectory, AppSettings.DatabaseName));
+            StartOrStopTimer();
+        }
+
+        /// <summary>
+        /// Checks for Autobackup and starts or stops the timer
+        /// </summary>
+        private void StartOrStopTimer()
+        {
+            if (AppSettings.AutoBackup)
+            {
+                if (AppSettings.BackupFrequency.Hours == 0 && AppSettings.BackupFrequency.Minutes == 0)
+                {
+                    MessageBox.Show("Invalid tidsindstillinger til autobackup!", "Fejl!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(AppSettings.AutoSaveLocation))
+                {
+                    MessageBox.Show("Invalid backup lokation til autobackup!", "Fejl!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                _autoBackupTimer.Interval = (1000 * 3600 * AppSettings.BackupFrequency.Hours) +
+                                            (60000 * AppSettings.BackupFrequency.Minutes);
+                _autoBackupTimer.Tick += AutoBackupTimerOnTick;
+                _autoBackupTimer.Start();
+                AutoBackuppictureBox.BackgroundImage = Resources.cloud_computing;
+            }
+            else
+            {
+                AutoBackuppictureBox.BackgroundImage = Resources.cloud_computing_off;
+                _autoBackupTimer.Stop();
+            }
+        }
+
+        /// <summary>
+        /// Autobackup timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AutoBackupTimerOnTick(object sender, EventArgs e)
+        {
+            if (!AppSettings.AutoBackup)
+            {
+                _autoBackupTimer.Stop();
+            }
+
+            if (!Directory.Exists(AppSettings.AutoSaveLocation))
+            {
+                MessageBox.Show("Invalid backup lokation til autobackup!\nSkift backup lokation for at starte backup igen!", "Fejl under autosave!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _autoBackupTimer.Stop();
+            }
+
+            if (AppSettings.OverrideBackups)
+            {
+                var path = Path.Combine(AppSettings.AutoSaveLocation, AppSettings.DatabaseName + ".bak");
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                var currentDbPath = Path.Combine(AppSettings.DatabaseDirectory, AppSettings.DatabaseName);
+                File.Copy(currentDbPath,path);
+            }
+
         }
 
         /// <summary>
@@ -77,6 +148,7 @@ namespace InventoryManagement
             comboboxItems.Delete(x => x.LocationString == locationComboBox.SelectedItem.ToString());
             UpdateLocationCombobox();
         }
+
         /// <summary>
         /// Creates the <see cref="AddNewType"/> form
         /// and allows the user to create a new type
@@ -143,8 +215,8 @@ namespace InventoryManagement
         {
             var rowInfo = Inventory.SelectedRows;
             var res = MessageBox.Show("Du er ved at slette " + rowInfo.Count + " rækker\nVil du fortsætte?",
-                "Bekræftelsesdialog", MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
-            if(res == DialogResult.No)return;
+                "Bekræftelsesdialog", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (res == DialogResult.No) return;
             var items = _db.GetCollection<Equipment>("eq");
             foreach (DataGridViewRow dataGridViewRow in rowInfo)
             {
@@ -173,7 +245,7 @@ namespace InventoryManagement
 
             //Retrieve the ID
             var manuelId = rowInfo[0].Cells[0].Value;
-            if(manuelId == null)return;
+            if (manuelId == null) return;
 
             //Retrieve equipment data from db
             var items = _db.GetCollection<Equipment>("eq");
@@ -198,7 +270,6 @@ namespace InventoryManagement
             UpdateInventory();
         }
 
-        
 
         /// <summary>
         /// Updates the location combobox with data
@@ -210,7 +281,7 @@ namespace InventoryManagement
 
             foreach (var location in comboboxItems)
             {
-                if(location.LocationString == null)continue;
+                if (location.LocationString == null) continue;
                 locationComboBox.Items.Add(location.LocationString);
             }
 
@@ -231,7 +302,7 @@ namespace InventoryManagement
             var comboboxItems = _db.GetCollection<VareType>("type").FindAll();
             foreach (var type in comboboxItems)
             {
-                if(type.Type == null)continue;
+                if (type.Type == null) continue;
                 itemTypeComboBox.Items.Add(type.Type);
             }
 
@@ -267,6 +338,12 @@ namespace InventoryManagement
         {
             Settings settings = new Settings(AppSettings);
             var result = settings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                AppSettings = settings.LocalApplicationSettings;
+                StartOrStopTimer();
+                AppSettings.Save();
+            }
         }
     }
 }
