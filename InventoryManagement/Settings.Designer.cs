@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.saveSettingsBtn = new MetroFramework.Controls.MetroButton();
             this.databaseLocationTextBox = new MetroFramework.Controls.MetroTextBox();
             this.databaseBrowseButton = new MetroFramework.Controls.MetroButton();
@@ -315,6 +316,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(577, 450);
             this.Controls.Add(this.startWithwindowsCheckBox);
             this.Controls.Add(this.metroLabel3);
@@ -326,7 +328,10 @@
             this.Controls.Add(this.databaseBrowseButton);
             this.Controls.Add(this.databaseLocationTextBox);
             this.Controls.Add(this.saveSettingsBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Settings";
+            this.Resizable = false;
             this.Text = "Indstillinger";
             this.backupPanel.ResumeLayout(false);
             this.backupPanel.PerformLayout();
