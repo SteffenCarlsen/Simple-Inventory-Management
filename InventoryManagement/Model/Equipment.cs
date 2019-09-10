@@ -68,5 +68,74 @@ namespace InventoryManagement.Model
         /// A note accompanying the item
         /// </summary>
         public string Note { get; set; }
+
+        /// <summary>
+        /// Returns if the specific equipment object contains a query string
+        /// </summary>
+        /// <param name="query">The query to search for</param>
+        /// <returns></returns>
+        public bool ContainsQueryString(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query)) return false;
+
+            if (Note != null)
+            {
+                if (Note.ContainsInsensitive(query))
+                {
+                    return true;
+                }
+            }
+            
+            if (EquipmentAge != null)
+            {
+                if (EquipmentAge.ToString().ContainsInsensitive(query))
+                {
+                    return true;
+                }
+            }
+            
+
+            if (BorrowTime != null)
+            {
+                if (BorrowTime.ToString().ContainsInsensitive(query))
+                {
+                    return true;
+                }
+            }
+            
+            if (Type != null)
+            {
+                if (Type.Type.ContainsInsensitive(query))
+                {
+                    return true;
+                }
+            }
+
+            if (Location != null)
+            {
+                if (Location.LocationString.ContainsInsensitive(query))
+                {
+                    return true;
+                }
+            }
+
+            if (Name != null)
+            {
+                if (Name.ContainsInsensitive(query))
+                {
+                    return true;
+                }
+            }
+
+            if (ManuelId != null)
+            {
+                if (ManuelId.ToString().ContainsInsensitive(query))
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
     }
 }

@@ -56,6 +56,7 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.AutoBackuppictureBox = new System.Windows.Forms.PictureBox();
             this.settingsPictureBox = new System.Windows.Forms.PictureBox();
+            this.QueryTextBox = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Inventory)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
@@ -88,7 +89,7 @@
             this.ID.HeaderText = "Udstyrs ID";
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 81;
+            this.ID.Width = 75;
             // 
             // NameField
             // 
@@ -348,12 +349,46 @@
             this.settingsPictureBox.TabStop = false;
             this.settingsPictureBox.Click += new System.EventHandler(this.settingsPictureBox_Click);
             // 
+            // QueryTextBox
+            // 
+            // 
+            // 
+            // 
+            this.QueryTextBox.CustomButton.Image = null;
+            this.QueryTextBox.CustomButton.Location = new System.Drawing.Point(128, 1);
+            this.QueryTextBox.CustomButton.Name = "";
+            this.QueryTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.QueryTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.QueryTextBox.CustomButton.TabIndex = 1;
+            this.QueryTextBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.QueryTextBox.CustomButton.UseSelectable = true;
+            this.QueryTextBox.CustomButton.Visible = false;
+            this.QueryTextBox.Lines = new string[0];
+            this.QueryTextBox.Location = new System.Drawing.Point(733, 34);
+            this.QueryTextBox.MaxLength = 32767;
+            this.QueryTextBox.Name = "QueryTextBox";
+            this.QueryTextBox.PasswordChar = '\0';
+            this.QueryTextBox.PromptText = "Søg her";
+            this.QueryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.QueryTextBox.SelectedText = "";
+            this.QueryTextBox.SelectionLength = 0;
+            this.QueryTextBox.SelectionStart = 0;
+            this.QueryTextBox.ShortcutsEnabled = true;
+            this.QueryTextBox.Size = new System.Drawing.Size(150, 23);
+            this.QueryTextBox.TabIndex = 10;
+            this.QueryTextBox.UseSelectable = true;
+            this.QueryTextBox.WaterMark = "Søg her";
+            this.QueryTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.QueryTextBox.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.QueryTextBox.TextChanged += new System.EventHandler(this.QueryTextBox_TextChanged);
+            // 
             // InventoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(1077, 552);
+            this.Controls.Add(this.QueryTextBox);
             this.Controls.Add(this.AutoBackuppictureBox);
             this.Controls.Add(this.settingsPictureBox);
             this.Controls.Add(this.metroPanel3);
@@ -407,6 +442,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Note;
         private System.Windows.Forms.PictureBox settingsPictureBox;
         private System.Windows.Forms.PictureBox AutoBackuppictureBox;
+        private MetroFramework.Controls.MetroTextBox QueryTextBox;
     }
 }
 

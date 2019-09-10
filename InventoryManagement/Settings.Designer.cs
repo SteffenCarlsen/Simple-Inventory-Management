@@ -34,6 +34,8 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.cancelSettingsButton = new MetroFramework.Controls.MetroButton();
             this.backupPanel = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.hoursSelector = new System.Windows.Forms.NumericUpDown();
             this.minutesSelector = new System.Windows.Forms.NumericUpDown();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
@@ -45,8 +47,6 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.databaseNameTextBox = new MetroFramework.Controls.MetroTextBox();
             this.startWithwindowsCheckBox = new MetroFramework.Controls.MetroCheckBox();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.backupPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesSelector)).BeginInit();
@@ -147,6 +147,24 @@
             this.backupPanel.VerticalScrollbarHighlightOnWheel = false;
             this.backupPanel.VerticalScrollbarSize = 10;
             // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(353, 74);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(62, 19);
+            this.metroLabel6.TabIndex = 13;
+            this.metroLabel6.Text = "Minutter:";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(202, 74);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel5.TabIndex = 12;
+            this.metroLabel5.Text = "Timer:";
+            // 
             // hoursSelector
             // 
             this.hoursSelector.Location = new System.Drawing.Point(255, 73);
@@ -156,7 +174,7 @@
             // 
             // minutesSelector
             // 
-            this.minutesSelector.Location = new System.Drawing.Point(421, 75);
+            this.minutesSelector.Location = new System.Drawing.Point(421, 73);
             this.minutesSelector.Name = "minutesSelector";
             this.minutesSelector.Size = new System.Drawing.Size(92, 20);
             this.minutesSelector.TabIndex = 10;
@@ -164,7 +182,7 @@
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(7, 75);
+            this.metroLabel4.Location = new System.Drawing.Point(7, 74);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(105, 19);
             this.metroLabel4.TabIndex = 9;
@@ -292,24 +310,6 @@
             this.startWithwindowsCheckBox.TabIndex = 9;
             this.startWithwindowsCheckBox.Text = "Automatisk start med Windows (Kræver opstart som Administrator)";
             this.startWithwindowsCheckBox.UseSelectable = true;
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(202, 74);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(47, 19);
-            this.metroLabel5.TabIndex = 12;
-            this.metroLabel5.Text = "Timer:";
-            // 
-            // metroLabel6
-            // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(353, 74);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(62, 19);
-            this.metroLabel6.TabIndex = 13;
-            this.metroLabel6.Text = "Minutter:";
             // 
             // Settings
             // 

@@ -38,6 +38,7 @@ namespace InventoryManagement
             InitializeComponent();
             AppSettings.Load();
             _db = new LiteDatabase(Path.Combine(AppSettings.DatabaseDirectory, AppSettings.DatabaseName));
+            _db.Shrink();
             StartOrStopTimer();
         }
 
@@ -100,6 +101,12 @@ namespace InventoryManagement
 
                 var currentDbPath = Path.Combine(AppSettings.DatabaseDirectory, AppSettings.DatabaseName);
                 File.Copy(currentDbPath,path);
+            }
+            else
+            {
+                var path = Path.Combine(AppSettings.AutoSaveLocation, Path.GetFileNameWithoutExtension(AppSettings.DatabaseName) + "_" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm") + ".bak");
+                var currentDbPath = Path.Combine(AppSettings.DatabaseDirectory, AppSettings.DatabaseName);
+                File.Copy(currentDbPath, path);
             }
 
         }
@@ -317,16 +324,34 @@ namespace InventoryManagement
         /// <summary>
         /// Updates the inventory listview with data
         /// </summary>
-        private void UpdateInventory()
+        private void UpdateInventory(string query = "")
         {
             Inventory.Rows.Clear();
             var items = _db.GetCollection<Equipment>("eq").FindAll();
-            foreach (var equipment in items)
+            if (string.IsNullOrWhiteSpace(query))
             {
-                Inventory.Rows.Add(equipment.ManuelId, equipment.Name, equipment.Type.Type,
-                    equipment.Location.LocationString, equipment.BorrowTime.ToShortDateString(),
-                    equipment.EquipmentAge.ToShortDateString(), equipment.Note);
+                foreach (var equipment in items)
+                {
+                    Inventory.Rows.Add(equipment.ManuelId, equipment.Name, equipment.Type.Type,
+                        equipment.Location.LocationString, equipment.BorrowTime.ToShortDateString(),
+                        equipment.EquipmentAge.ToShortDateString(), equipment.Note);
+                }
             }
+            else
+            {
+                foreach (var equipment in items)
+                {
+                    if (equipment.ContainsQueryString(query))
+                    {
+                        Inventory.Rows.Add(equipment.ManuelId, equipment.Name, equipment.Type.Type,
+                            equipment.Location.LocationString, equipment.BorrowTime.ToShortDateString(),
+                            equipment.EquipmentAge.ToShortDateString(), equipment.Note);
+                    }
+                }
+            }
+            
+           
+            
         }
 
         /// <summary>
@@ -344,6 +369,11 @@ namespace InventoryManagement
                 StartOrStopTimer();
                 AppSettings.Save();
             }
+        }
+
+        private void QueryTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateInventory(QueryTextBox.Text);
         }
     }
 }

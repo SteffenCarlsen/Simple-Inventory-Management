@@ -86,7 +86,23 @@ namespace InventoryManagement
             LocalApplicationSettings.BackupFrequency = new TimeSpan((int)hoursSelector.Value,(int)minutesSelector.Value,0);
             LocalApplicationSettings.AutoSaveLocation = backupLocationTextBox.Text;
             LocalApplicationSettings.OverrideBackups = overrideOldBackupCheckBox.Checked;
+
             this.DialogResult = DialogResult.OK;
+
+            if (LocalApplicationSettings.StartWithWindows)
+            {
+                if (!Startup.IsInStartup())
+                {
+                    Startup.RunOnStartup();
+                }
+            }
+            else
+            {
+                if (Startup.IsInStartup())
+                {
+                    Startup.RemoveFromStartup();
+                }
+            }
         }
 
         /// <summary>

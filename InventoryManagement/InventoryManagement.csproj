@@ -141,6 +141,8 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="CreateTypesUI\AddNewInventoryItem.resx">
       <DependentUpon>AddNewInventoryItem.cs</DependentUpon>
     </EmbeddedResource>
