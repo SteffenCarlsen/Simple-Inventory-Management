@@ -368,7 +368,7 @@
             this.QueryTextBox.MaxLength = 32767;
             this.QueryTextBox.Name = "QueryTextBox";
             this.QueryTextBox.PasswordChar = '\0';
-            this.QueryTextBox.PromptText = "Søg her";
+            this.QueryTextBox.WaterMark = "Søg her";
             this.QueryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.QueryTextBox.SelectedText = "";
             this.QueryTextBox.SelectionLength = 0;
