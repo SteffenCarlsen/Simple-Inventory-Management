@@ -2,7 +2,7 @@
 Simple Inventory Management is a basic implementation of a inventory management system.
 It was created based on a Danish use-case, thus the user interaction and user interface uses danish, however, the code should be commented well enough to make sense of what happens to translate.
 
-![](https://i.imgur.com/3GEDBr1.png)
+![](https://i.imgur.com/hTlVDSh.png)
 
 ## Features
 * Create, Edit and Delete Inventory based on:
