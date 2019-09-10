@@ -14,10 +14,13 @@ It was created based on a Danish use-case, thus the user interaction and user in
   * Item age
   * User note
 * Automatic backup system
+  * Indicator of enabled or not by cloud icon
   * Backup every x hours and y minutes
   * Override existing backup
-  * TODO: Create new backups each time
+  * Create new backups each time
 * General Settings
   * Specify database location
   * Specifiy database name
-  * TODO: Autostart with Windows
+  * Autostart with Windows
+* Extra functionality
+  * Search query the index 
