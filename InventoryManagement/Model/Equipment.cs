@@ -127,14 +127,11 @@ namespace InventoryManagement.Model
                 }
             }
 
-            if (ManuelId != null)
+            if (ManuelId.ToString().ContainsInsensitive(query))
             {
-                if (ManuelId.ToString().ContainsInsensitive(query))
-                {
-                    return true;
-                }
+                return true;
             }
-            
+
             return false;
         }
     }

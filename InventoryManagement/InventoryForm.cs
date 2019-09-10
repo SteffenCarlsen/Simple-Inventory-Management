@@ -7,6 +7,7 @@ using InventoryManagement.Model;
 using InventoryManagement.Properties;
 using LiteDB;
 using MetroFramework.Forms;
+using AutoUpdaterDotNET;
 using Timer = System.Windows.Forms.Timer;
 namespace InventoryManagement
 {

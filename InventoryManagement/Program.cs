@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 
 namespace InventoryManagement
 {
@@ -13,6 +14,7 @@ namespace InventoryManagement
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            AutoUpdater.Start("https://raw.githubusercontent.com/SteffenCarlsen/Simple-Inventory-Management-Autoupdate-XML-storage/master/AutoUpdater.xml");
             Application.Run(new InventoryForm());
         }
     }
