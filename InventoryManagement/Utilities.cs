@@ -16,7 +16,6 @@ namespace InventoryManagement
         /// </summary>
         /// <param name="source"></param>
         /// <param name="toCheck"></param>
-        /// <param name="comp"></param>
         /// <returns></returns>
         public static bool ContainsInsensitive(this string source, string toCheck)
         {
