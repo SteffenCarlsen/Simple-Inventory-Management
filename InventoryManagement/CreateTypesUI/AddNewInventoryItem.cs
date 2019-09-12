@@ -105,6 +105,11 @@ namespace InventoryManagement.CreateTypesUI
             }
 
             var location = _db.GetCollection<Location>("loc").FindOne(x => x.LocationString == locationString);
+            if (location == null)
+            {
+                DialogResult = DialogResult.Cancel;
+                return;
+            }
 
             var issueDateTime = IssueDateTime.Value;
             var eqAge = AgeDateTime.Value;
