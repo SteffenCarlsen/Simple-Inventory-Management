@@ -22,6 +22,8 @@ namespace InventoryManagement
         /// </summary>
         public ApplicationSettings LocalApplicationSettings;
 
+
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -79,6 +81,8 @@ namespace InventoryManagement
                 }
             }
 
+            DialogResult = !LocalApplicationSettings.DatabaseDirectory.Equals(databaseLocationTextBox.Text) ? DialogResult.Retry : DialogResult.OK;
+
             LocalApplicationSettings.DatabaseDirectory = databaseLocationTextBox.Text;
             LocalApplicationSettings.DatabaseName = databaseNameTextBox.Text;
             LocalApplicationSettings.StartWithWindows = startWithwindowsCheckBox.Checked;
@@ -86,8 +90,6 @@ namespace InventoryManagement
             LocalApplicationSettings.BackupFrequency = new TimeSpan((int)hoursSelector.Value,(int)minutesSelector.Value,0);
             LocalApplicationSettings.AutoSaveLocation = backupLocationTextBox.Text;
             LocalApplicationSettings.OverrideBackups = overrideOldBackupCheckBox.Checked;
-
-            this.DialogResult = DialogResult.OK;
 
             if (LocalApplicationSettings.StartWithWindows)
             {

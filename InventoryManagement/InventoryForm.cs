@@ -19,7 +19,7 @@ namespace InventoryManagement
         /// <summary>
         /// The database instance
         /// </summary>
-        private readonly LiteDatabase _db;
+        private LiteDatabase _db;
 
         /// <summary>
         /// A global application settings instance
@@ -105,7 +105,7 @@ namespace InventoryManagement
             }
             else
             {
-                var path = Path.Combine(AppSettings.AutoSaveLocation, Path.GetFileNameWithoutExtension(AppSettings.DatabaseName) + "_" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm") + ".bak");
+                var path = Path.Combine(AppSettings.AutoSaveLocation, Path.GetFileNameWithoutExtension(AppSettings.DatabaseName) + "_" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss") + ".bak");
                 var currentDbPath = Path.Combine(AppSettings.DatabaseDirectory, AppSettings.DatabaseName);
                 File.Copy(currentDbPath, path);
             }
@@ -362,13 +362,48 @@ namespace InventoryManagement
         /// <param name="e"></param>
         private void settingsPictureBox_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings(AppSettings);
+            var oldSettingsInstance = AppSettings.ShallowCopy();
+            var settings = new Settings(AppSettings);
             var result = settings.ShowDialog();
+
+            //Settings were OK, no database changes!
             if (result == DialogResult.OK)
             {
                 AppSettings = settings.LocalApplicationSettings;
                 StartOrStopTimer();
                 AppSettings.Save();
+            }
+
+            //Settings were ok, database need to migrate to new location!
+            if (result == DialogResult.Retry)
+            {
+                AppSettings = settings.LocalApplicationSettings;
+
+                var oldDb = Path.Combine(oldSettingsInstance.DatabaseDirectory, oldSettingsInstance.DatabaseName);
+                var newDb = Path.Combine(AppSettings.DatabaseDirectory, AppSettings.DatabaseName);
+
+                AppSettings.Save();
+
+                if (!File.Exists(oldDb))
+                {
+                    MessageBox.Show("Gammel database kan ikke tilgåes lige nu, prøv igen!","Fejl!",MessageBoxButtons.OK);
+                    return;
+                }
+
+                if (File.Exists(newDb))
+                {
+                    MessageBox.Show("Der findes allerede en database", "Fejl", MessageBoxButtons.OK);
+                    return;
+                }
+
+                File.Copy(oldDb,newDb);
+
+                if (File.Exists(newDb))
+                {
+                    _db = new LiteDatabase(newDb);
+                }
+
+                StartOrStopTimer();
             }
         }
 

@@ -64,6 +64,15 @@ namespace InventoryManagement.Model
         }
 
         /// <summary>
+        /// Performs a shallowcopy of the settings object
+        /// </summary>
+        /// <returns></returns>
+        public ApplicationSettings ShallowCopy()
+        {
+            return (ApplicationSettings)this.MemberwiseClone();
+        }
+
+        /// <summary>
         /// Saves the setting file to disk
         /// </summary>
         /// <returns></returns>
